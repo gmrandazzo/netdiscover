@@ -49,15 +49,15 @@ AWK="gawk"
 #fi
 if ! [ -f "$TMPF" -a -s "$TMPF" ]; then
   echo -n "Trying download \"$ORIGF\" with lynx..."
-  if [[ -x /usr/bin/lynx ]]; then
+  if [ -x /usr/bin/lynx ] || [ -x /usr/local/bin/lynx ]; then
     lynx -source $URL >"$TMPF"
   else
      echo -n " with elinks..."
-     if [[ -x /usr/bin/elinks ]]; then
+     if [ -x /usr/bin/elinks ] || [ -x /usr/local/bin/elinks ]; then
        elinks -source $URL >"$TMPF"
      else
         echo " with wget..."
-        if [[ -x /usr/bin/wget ]]; then
+        if [ -x /usr/bin/wget ] || [ -x /usr/local/bin/wget ]; then
           wget --quiet --output-document="$TMPF" $URL
         else
            echo "$JA: Can't obtain \"$URL\"!"
