@@ -49,21 +49,27 @@ AWK="gawk"
 #fi
 if ! [ -f "$TMPF" -a -s "$TMPF" ]; then
   echo -n "Trying download \"$ORIGF\" with lynx..."
-  if [ -x /usr/bin/lynx ] || [ -x /usr/local/bin/lynx ]; then
-    lynx -source $URL >"$TMPF"
+  if [ -x /usr/bin/lynx ]; then
+    /usr/bin/lynx -source $URL >"$TMPF"
+  elif [ -x /usr/local/bin/lynx ]; then
+    /usr/local/bin/lynx -source $URL >"$TMPF"
   else
-     echo -n " with elinks..."
-     if [ -x /usr/bin/elinks ] || [ -x /usr/local/bin/elinks ]; then
-       elinks -source $URL >"$TMPF"
-     else
-        echo " with wget..."
-        if [ -x /usr/bin/wget ] || [ -x /usr/local/bin/wget ]; then
-          wget --quiet --output-document="$TMPF" $URL
-        else
-           echo "$JA: Can't obtain \"$URL\"!"
-           exit 1
-        fi
-     fi
+    echo -n " with elinks..."
+    if [ -x /usr/bin/elinks ]; then
+      /usr/bin/elinks -source $URL >"$TMPF"
+    elif [ -x /usr/local/bin/elinks ]; then
+      /usr/local/bin/elinks -source $URL >"$TMPF"
+    else
+      echo " with wget..."
+      if [ -x /usr/bin/wget ]; then
+        /usr/bin/wget --quiet --output-document="$TMPF" $URL
+      elif [ -x /usr/local/bin/wget ]; then
+        /usr/local/bin/wget --quiet --output-document="$TMPF" $URL
+      else
+        echo "$JA: Can't obtain \"$URL\"!"
+        exit 1
+      fi
+    fi
   fi
 else
    echo -n "\"$TMPF\" already exist, skipping download..."
