@@ -25,7 +25,7 @@ for line in foui:
     if "base 16" in line:
         var = filter(None, str.split(line.strip(), "\t"))
         if len(var) == 2:
-            fouih.write("   { \"%s\", \"%s\" },\n" % (str.split(var[0], " ")[0], var[1].replace("\"", ""))
+            fouih.write("   { \"%s\", \"%s\" },\n" % (str.split(var[0], " ")[0], var[1].replace("\"", "")))
         elif len(var) == 1:
             fouih.write("   { \"%s\", \"\" },\n" % (str.split(var[0], " ")[0]))
         else:
