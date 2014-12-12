@@ -1,4 +1,18 @@
 #/usr/bin/env python
+# Script for generation "oui.h" file (netdiscover program at
+#   http://nixgeneration.com/~jaime/netdiscover/
+#
+# Requirement: python >= 2.6
+#
+# Script generate src/oui.h file.
+#
+# 12-Dec-2014 Giuseppe Marco Randazzo <gmrandazzo@gmail.com> (Original author)
+#
+#  This program is free software; you can redistribute it and/or modify
+#  it under the terms of the GNU General Public License as published by
+#  the Free Software Foundation; either version 3 of the License, or
+#  (at your option) any later version.
+#
 
 import time
 import urllib
